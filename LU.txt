@@ -1,0 +1,33 @@
+clc;
+clear all;
+
+
+% Define matrix A
+A = [2 -1 2; 3 3 9; 3 3 5];
+
+
+% Get the size of the matrix A
+n = size(A,1);
+
+
+% Initialize L as the identity matrix and U as the matrix A
+L = eye(n);
+U = A;
+
+
+% Perform the LU decomposition process
+for j = 1:n-1
+    for i = j+1:n
+        % Compute the multiplier for the lower triangular matrix L
+        L(i,j) = U(i,j) / U(j,j);
+        % Update the rows of U to form the upper triangular matrix
+        U(i,:) = U(i,:) - L(i,j) * U(j,:);
+    end
+end
+
+
+% Display the results
+disp('Upper triangular matrix U is:');
+disp(U);
+disp('Lower triangular matrix L is:');
+disp(L);
